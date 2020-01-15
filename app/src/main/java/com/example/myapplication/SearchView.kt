@@ -21,7 +21,7 @@ class SearchView(
     }
 
     private fun openSearch() {
-        search_input_text.setText("")
+//        search_input_text.setText("")
         search_open_view.visibility = View.VISIBLE
 //        search_closed_view.visibility = View.INVISIBLE
         val circularReveal = ViewAnimationUtils.createCircularReveal(
@@ -51,7 +51,7 @@ class SearchView(
             override fun onAnimationEnd(animation: Animator?) {
 //                search_closed_view.visibility = View.VISIBLE
                 search_open_view.visibility = View.INVISIBLE
-                search_input_text.setText("")
+//                search_input_text.setText("")
                 circularConceal.removeAllListeners()
             }
         })

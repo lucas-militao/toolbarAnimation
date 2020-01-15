@@ -34,33 +34,6 @@ class MToolbar : Toolbar {
 
     init {
         getTitleTextView()
-
-//        getTitleTextView().viewTreeObserver.addOnGlobalLayoutListener(object :
-//            ViewTreeObserver.OnGlobalLayoutListener {
-//            override fun onGlobalLayout() {
-//
-//                val view = this@MToolbar
-//                print("acabou")
-//
-//                val array = intArrayOf(0, 0)
-//                view.getTitleTextView().getLocationInWindow(array)
-//                array
-//
-//                spaceLeftTitle = middleToolbar - array[1]
-//                spaceRightTitle = toolbarTextViewWidthSize - spaceLeftTitle
-//                print("")
-//
-//                getTitleTextView().apply {
-//                    val lp = layoutParams.apply {
-//                        width = spaceRightTitle * 2
-//                    }
-//                    layoutParams = lp
-//                }
-//
-//                getTitleTextView().viewTreeObserver.removeOnGlobalLayoutListener(this)
-//            }
-//        })
-
     }
 
     override fun getTitle(): CharSequence {
@@ -122,14 +95,6 @@ class MToolbar : Toolbar {
         return _title
     }
 
-//    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-//
-//        toolbarHeightSize = measuredHeight
-//        toolbarWidhtSize = measuredWidth
-//        middleToolbar = toolbarWidhtSize / 2
-//    }
-
     inner class ToolbarTitleTextView(context: Context?) : TextView(context) {
 
         override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -157,16 +122,6 @@ class MToolbar : Toolbar {
             }
 
             layoutParams = lp
-
-//
-//            if (layoutParams.width == ViewGroup.LayoutParams.MATCH_PARENT) {
-//                val lp = layoutParams.apply {
-//                    width = spaceRightTitle * 2
-//                }
-//                layoutParams = lp
-//                requestLayout()
-//            }
-
 
         }
 

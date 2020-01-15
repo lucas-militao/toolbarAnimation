@@ -24,20 +24,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun openSearchView() {
-        search_input_text.setText("")
-        search_open_view.visibility = View.VISIBLE
-        val circularReveal = ViewAnimationUtils.createCircularReveal(
-            search_open_view,
-
-        )
     }
 }
