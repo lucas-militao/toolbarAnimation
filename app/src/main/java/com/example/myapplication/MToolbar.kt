@@ -24,6 +24,14 @@ class MToolbar : Toolbar {
     private var spaceLeftView: Int = 0
     private var spaceRightView: Int = 0
 
+    public fun get_View() : RelativeLayout{
+        return _view
+    }
+
+    public fun get_Title() : TextView {
+        return _title
+    }
+
     constructor(context: Context?) : super(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(

@@ -7,42 +7,84 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:id="@+id/appbar"-->
-<!--        style="@style/ThemeOverlay.AppCompat.Light"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:animateLayoutChanges="true"-->
-<!--        android:background="?attr/colorSurface"-->
-<!--        android:fitsSystemWindows="true"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-
-
-<!--        <com.example.myapplication.MToolbar-->
-<!--            style="@style/Widget.AppCompat.Light.ActionBar"-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            app:contentInsetStartWithNavigation="0dp"-->
-<!--            app:navigationIcon="@android:drawable/sym_contact_card"-->
-<!--            app:layout_collapseMode="pin"-->
-<!--            app:title="Torpedos"-->
-<!--            app:menu="@menu/menu_plant_detail"-->
-<!--            app:titleTextColor="?attr/colorOnSurface">-->
-
-<!--        </com.example.myapplication.MToolbar>-->
-
-
-
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
-
-    <com.example.myapplication.SearchView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        style="@style/ThemeOverlay.AppCompat.Light"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="?attr/actionBarSize"
+        android:animateLayoutChanges="true"
+        android:background="?attr/colorSurface"
+        android:fitsSystemWindows="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.example.myapplication.MToolbar
+            style="@style/Widget.AppCompat.Light.ActionBar"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@android:drawable/sym_contact_card"
+            app:layout_collapseMode="pin"
+            app:title="Torpedos"
+            app:menu="@menu/menu_plant_detail"
+            app:titleTextColor="?attr/colorOnSurface">
+
+        </com.example.myapplication.MToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/mScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titulo"
+                android:layout_marginTop="20px"
+                android:layout_marginBottom="20px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="UM TEXTO QUALQUER"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem_ipsom"
+                android:layout_marginTop="20px"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem_ipsom"
+                android:layout_marginTop="20px"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem_ipsom"
+                android:layout_marginTop="20px"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem_ipsom"
+                android:layout_marginTop="20px"/>
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
