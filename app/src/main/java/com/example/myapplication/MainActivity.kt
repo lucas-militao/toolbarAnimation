@@ -24,20 +24,6 @@ class MainActivity : AppCompatActivity() {
             if(isViewVisibleInScroll(titulo)) {
                 if(toolbar.title == "") {
                     toolbar.title = titulo.text
-// TOOLBAR
-//                    val array = intArrayOf(0, 0)
-//                    toolbar.get_View().getLocationInWindow(array)
-//
-//                    var inicio = array[0]
-//                    var fim = toolbar.get_View().measuredWidth + inicio
-//
-//                    val circularReveal = ViewAnimationUtils.createCircularReveal(
-//                        toolbar,
-//                        inicio,
-//                        fim,
-//                        inicio.toFloat(),
-//                        fim.toFloat()
-//                    )
 
                     val circularReveal = ViewAnimationUtils.createCircularReveal(
                         toolbar.get_Title(),
@@ -49,28 +35,10 @@ class MainActivity : AppCompatActivity() {
                     circularReveal.duration = 300
                     circularReveal.start()
                 }
+
             } else {
                 toolbar.title = ""
             }
-
-
-//            if(scrollY >= titulo.y + titulo.measuredHeight.times(0.8)) {
-//                if (toolbar.title == "") {
-//                    toolbar.title = titulo.text
-//                    val circularReveal = ViewAnimationUtils.createCircularReveal(
-//                        toolbar,
-//                        (toolbar.right + toolbar.left) / 2,
-//                    (toolbar.top + toolbar.bottom) / 2,
-//                    0f, toolbar.width.toFloat()
-//                    )
-//                    circularReveal.duration = 300
-//                    circularReveal.start()
-//                }
-//            }
-//            else
-//                toolbar.title = ""
-
-
         })
 
     }

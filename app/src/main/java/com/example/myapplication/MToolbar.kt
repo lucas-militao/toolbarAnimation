@@ -5,7 +5,9 @@ import android.os.Build
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.ViewAnimationUtils
 import android.widget.RelativeLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.marginStart
@@ -14,10 +16,9 @@ class MToolbar : Toolbar {
 
     private lateinit var _title: TextView
     private lateinit var _view: RelativeLayout
+    public var _titleAlignment: Int? = 0
 
-    private var toolbarViewHeightSize: Int = 0
     private var viewWidthSize: Int = 0
-    private var toolbarHeightSize: Int = 0
     private var toolbarWidhtSize: Int = 0
     private var middleToolbar: Int = 0
     private var middleToolbarView: Int = 0
@@ -33,18 +34,18 @@ class MToolbar : Toolbar {
     }
 
     constructor(context: Context?) : super(context, null)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    )
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
+        init(context, attrs)
+    }
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+    private fun init(context: Context?, attrs: AttributeSet?) {
+        val attributes = context?.obtainStyledAttributes(attrs, R.styleable.MToolbar)
+        _titleAlignment = attributes?.getInt(R.styleable.MToolbar_mt_title_alignment, 1)
+    }
 
     init {
         getTitleTextView()
-
-
-
     }
 
     override fun getTitle(): CharSequence {
@@ -106,11 +107,77 @@ class MToolbar : Toolbar {
         return _title
     }
 
+    public fun animateToolbarTitle(scrollView: ScrollView, textView: TextView) {
+
+        var scrollY = scrollView.scrollY
+
+        if(scrollY >= textView.y + textView.y + textView.measuredHeight) {
+            if(_title.text == "") {
+                _title.text = textView.text
+
+                val circularReveal = ViewAnimationUtils.createCircularReveal(
+                    _title,
+                    (_title.right + _title.left) / 2,
+                    (_title.top + _title.bottom) / 2,
+                    _title.width.toFloat(), 0f
+                )
+
+                circularReveal.duration = 300
+                circularReveal.start()
+            }
+        } else {
+            _title.text = ""
+
+            val circularReveal = ViewAnimationUtils.createCircularReveal(
+                _title,
+                (_title.right + _title.left) / 2,
+                (_title.top + _title.bottom) / 2,
+                0f, _title.width.toFloat()
+            )
+
+            circularReveal.duration = 300
+            circularReveal.start()
+        }
+    }
+
     inner class ToolbarTitleTextView(context: Context?) : TextView(context) {
 
         override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
+            if(_titleAlignment == 1) {
+                this.gravity = Gravity.CENTER
+                centralizeToolbarTitle(heightMeasureSpec)
+            } else if(_titleAlignment == 2) {
+                this.gravity = Gravity.LEFT
+            }
+
+//            toolbarWidhtSize = this@MToolbar.measuredWidth
+//            viewWidthSize = this@MToolbar._view.measuredWidth
+//            middleToolbar = toolbarWidhtSize / 2
+//            middleToolbarView = viewWidthSize / 2
+//
+//            val array = intArrayOf(0, 0)
+//            this@MToolbar._view.getLocationInWindow(array)
+//
+//            spaceLeftView = middleToolbar - array[0]
+//            spaceRightView = viewWidthSize - spaceLeftView
+//
+//            val lp = (this.layoutParams as RelativeLayout.LayoutParams).apply  {
+//                if(spaceLeftView > spaceRightView) {
+//                    setMeasuredDimension(spaceRightView * 2, MeasureSpec.getSize(heightMeasureSpec))
+//                    setMargins(middleToolbar - (this@ToolbarTitleTextView.measuredWidth / 2) - array[0], 0, 0, 0)
+//                } else {
+//                    setMeasuredDimension(spaceLeftView * 2, MeasureSpec.getSize(heightMeasureSpec))
+//                    setMargins(0, 0, middleToolbar - (this@ToolbarTitleTextView.measuredWidth / 2) - array[0], 0)
+//                }
+//            }
+//
+//            layoutParams = lp
+
+        }
+
+        private fun centralizeToolbarTitle(heightMeasureSpec: Int) {
             toolbarWidhtSize = this@MToolbar.measuredWidth
             viewWidthSize = this@MToolbar._view.measuredWidth
             middleToolbar = toolbarWidhtSize / 2
@@ -133,8 +200,9 @@ class MToolbar : Toolbar {
             }
 
             layoutParams = lp
-
         }
+
+
 
     }
 
