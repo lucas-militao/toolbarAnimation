@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MToolbar">
+
+        <attr name="mt_title_alignment">
+            <enum name="center" value="1" />
+            <enum name="left" value="2" />
+        </attr>
+
+    </declare-styleable>
+
+</resources>

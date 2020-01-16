@@ -42,6 +42,9 @@ class MToolbar : Toolbar {
 
     init {
         getTitleTextView()
+
+
+
     }
 
     override fun getTitle(): CharSequence {

@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun isViewVisibleInScroll(view : View) : Boolean{
+    private fun isViewVisibleInScroll(view : View) : Boolean {
 
         var scrollY = mScroll.scrollY
 
