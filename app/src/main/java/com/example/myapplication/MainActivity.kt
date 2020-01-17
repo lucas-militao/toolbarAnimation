@@ -1,5 +1,8 @@
 package com.example.myapplication
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
@@ -11,33 +14,46 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar.title = ""
-
         setupView()
 
     }
 
     private fun setupView() {
 
+        toolbar._title.visibility = View.INVISIBLE
+        toolbar._title.text = titulo.text
+
         mScroll.viewTreeObserver.addOnScrollChangedListener(ViewTreeObserver.OnScrollChangedListener {
 
-            if(isViewVisibleInScroll(titulo)) {
-                if(toolbar.title == "") {
-                    toolbar.title = titulo.text
+            val cX = (toolbar._title.right + toolbar._title.left) / 2
+            val cY = (toolbar._title.top + toolbar._title.bottom) / 2
 
+            if(isViewVisibleInScroll(titulo)) {
+                if (toolbar._title.visibility == View.INVISIBLE) {
                     val circularReveal = ViewAnimationUtils.createCircularReveal(
-                        toolbar.get_Title(),
-                        (toolbar.get_Title().right + toolbar.get_Title().left) / 2,
-                        (toolbar.get_Title().top + toolbar.get_Title().bottom) / 2,
-                        0f, toolbar.get_Title().width.toFloat()
+                        toolbar._title, cX, cY, 0f, toolbar._title.width.toFloat()
                     )
 
-                    circularReveal.duration = 300
+//                circularReveal.duration = 300
+                    toolbar._title.visibility = View.VISIBLE
                     circularReveal.start()
                 }
-
             } else {
-                toolbar.title = ""
+
+                val circularReveal = ViewAnimationUtils.createCircularReveal(
+                    toolbar._title, cX, cY, toolbar._title.width.toFloat(), 0f
+                )
+
+                circularReveal.addListener(object : AnimatorListenerAdapter() {
+
+                    override fun onAnimationEnd(animation: Animator?) {
+                        super.onAnimationEnd(animation)
+                        toolbar._title.visibility = View.INVISIBLE
+                    }
+
+                })
+
+                circularReveal.start()
             }
         })
 
