@@ -30,7 +30,7 @@
             app:contentInsetStartWithNavigation="0dp"
             app:navigationIcon="@android:drawable/sym_contact_card"
             app:layout_collapseMode="pin"
-            app:title="Torpedos"
+            app:title="Disciplinas e Grupos"
             app:menu="@menu/menu_plant_detail"
             app:titleTextColor="?attr/colorOnSurface">
 

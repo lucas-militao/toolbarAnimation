@@ -11,21 +11,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var animationReveal : AnimationReveal
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setupView()
-
+        toolbar.animateTitle(titulo, mScroll, 100)
     }
 
     private fun setupView() {
 
-        animationReveal = AnimationReveal(toolbar._title, titulo, mScroll)
 
-        animationReveal.startAnimation()
 
     }
 

@@ -5,23 +5,21 @@ import android.animation.AnimatorListenerAdapter
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewTreeObserver
-import android.view.animation.Animation
 import android.widget.ScrollView
-import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.TextView
 
-class AnimationReveal {
+class AnimationReveal(
+    private var view: View,
+    private var title: View,
+    private var scrollView: ScrollView,
+    val duration: Long = 300L
+) {
 
-    private lateinit var view: View
-    private lateinit var title: View
-    private lateinit var scrollView: ScrollView
     private var cX: Int = 0
     private var cY: Int = 0
     private var circularReveal: Animator? = null
 
-    constructor(view: View, title: View, scrollView: ScrollView) {
-        this.view = view
-        this.title = title
-        this.scrollView = scrollView
+    init {
         this.cX = (view.right + view.left) / 2
         this.cY = (view.top + view.bottom) / 2
     }
@@ -36,7 +34,7 @@ class AnimationReveal {
         )
 
         view.visibility = View.VISIBLE
-        circularReveal?.duration = 300
+        circularReveal?.duration = duration
         circularReveal?.start()
     }
 
@@ -59,7 +57,7 @@ class AnimationReveal {
             }
         })
 
-        circularReveal?.duration = 300
+        circularReveal?.duration = duration
         circularReveal?.start()
     }
 
@@ -67,23 +65,24 @@ class AnimationReveal {
 
         view.visibility = View.INVISIBLE
 
-        scrollView.viewTreeObserver.addOnScrollChangedListener( ViewTreeObserver.OnScrollChangedListener {
+        scrollView.viewTreeObserver.addOnScrollChangedListener(ViewTreeObserver.OnScrollChangedListener {
 
             var positionView = title.y + title.measuredHeight
 
             val array = intArrayOf(0, 0)
             var position = view.getLocationInWindow(array)
 
-            cX = array[0]
-            cY = array[1]
+            cX = 0
+            cY = array[1] + (view.measuredHeight / 2) - (view as TextView).textSize.toInt()
 
-            if(scrollView.scrollY >= positionView.times(0.8)) {
-                if(view.visibility == View.INVISIBLE) {
+            if (scrollView.scrollY >= positionView.times(0.8)) {
+                if (view.visibility == View.INVISIBLE) {
                     revealView()
                 }
             } else {
-                if(view.visibility == View.VISIBLE &&
-                    (circularReveal?.isStarted == false || circularReveal?.isRunning == false)) {
+                if (view.visibility == View.VISIBLE &&
+                    (circularReveal?.isStarted == false || circularReveal?.isRunning == false)
+                ) {
                     hideView()
                 }
             }

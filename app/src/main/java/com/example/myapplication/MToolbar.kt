@@ -11,8 +11,11 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.marginStart
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MToolbar : Toolbar {
+
+
 
     public lateinit var _title: TextView
     public lateinit var _view: RelativeLayout
@@ -35,10 +38,16 @@ class MToolbar : Toolbar {
     private fun init(context: Context?, attrs: AttributeSet?) {
         val attributes = context?.obtainStyledAttributes(attrs, R.styleable.MToolbar)
         _titleAlignment = attributes?.getInt(R.styleable.MToolbar_mt_title_alignment, 1)
+        attributes?.recycle()
     }
 
     init {
         getTitleTextView()
+    }
+
+    fun animateTitle(title: TextView, scroll: ScrollView, duration: Long) {
+        animationReveal = AnimationReveal(_title, title, scroll)
+        animationReveal.startAnimation()
     }
 
     override fun getTitle(): CharSequence {
@@ -109,10 +118,10 @@ class MToolbar : Toolbar {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
             if(_titleAlignment == 1) {
-                this.gravity = Gravity.CENTER
+                this.textAlignment = TEXT_ALIGNMENT_CENTER
                 centralizeToolbarTitle(heightMeasureSpec)
             } else if(_titleAlignment == 2) {
-                this.gravity = Gravity.LEFT
+                this.textAlignment = TEXT_ALIGNMENT_VIEW_START
             }
 
         }
