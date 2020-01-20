@@ -16,6 +16,7 @@ class MToolbar : Toolbar {
 
     public lateinit var _title: TextView
     public lateinit var _view: RelativeLayout
+    public lateinit var animationReveal: AnimationReveal
     public var _titleAlignment: Int? = 0
 
     private var viewWidthSize: Int = 0
@@ -93,45 +94,14 @@ class MToolbar : Toolbar {
 
                 tv.layoutParams = lp
 
+
+
                 _view.addView(tv)
             }
         }
 
         return _title
     }
-
-//    public fun animateToolbarTitle(scrollView: ScrollView, textView: TextView, _title : TextView) {
-//
-//        var scrollY = scrollView.scrollY
-//
-//        if(scrollY >= textView.y + textView.measuredHeight) {
-//            if(_title.text == "") {
-//                _title.text = textView.text
-//
-//                val circularReveal = ViewAnimationUtils.createCircularReveal(
-//                    _title,
-//                    (_title.right + _title.left) / 2,
-//                    (_title.top + _title.bottom) / 2,
-//                    _title.width.toFloat(), 0f
-//                )
-//
-//                circularReveal.duration = 300
-//                circularReveal.start()
-//            }
-//        } else {
-//            _title.text = ""
-//
-//            val circularReveal = ViewAnimationUtils.createCircularReveal(
-//                _title,
-//                (_title.right + _title.left) / 2,
-//                (_title.top + _title.bottom) / 2,
-//                0f, _title.width.toFloat()
-//            )
-//
-//            circularReveal.duration = 300
-//            circularReveal.start()
-//        }
-//    }
 
     inner class ToolbarTitleTextView(context: Context?) : TextView(context) {
 
@@ -172,9 +142,6 @@ class MToolbar : Toolbar {
             layoutParams = lp
         }
 
-
-
     }
-
 
 }
